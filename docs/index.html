@@ -3,8 +3,208 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="refresh" content="0; url=privacy.html" />
-<title>Kalm</title>
+<title>Kalm — a phone lock with no stop button</title>
+<meta name="description" content="Kalm locks your Android phone for the time you choose, from 1 minute to 3 hours. Phone and Messages stay available. Nothing leaves your phone." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Kalm — a phone lock with no stop button" />
+<meta property="og:description" content="Lock your Android phone for 1 minute to 3 hours. Phone and Messages stay available. Nothing leaves your phone." />
+<meta property="og:url" content="https://shih-vaa.github.io/kalm-legal/" />
+<meta name="theme-color" content="#101514" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='24 24 60 60'%3E%3Crect x='24' y='24' width='60' height='60' rx='14' fill='%23101514'/%3E%3Cpath d='M54,30 A24,24 0 1,1 38,36.5' fill='none' stroke='%237FD1AE' stroke-width='6' stroke-linecap='round'/%3E%3C/svg%3E" />
+<style>
+  :root {
+    color-scheme: dark light;
+    --bg: #101514; --surface: #1e2826; --text: #e8efec; --muted: #8fa39b;
+    --accent: #7fd1ae; --accent-dim: #2f4a42; --line: #2a3a36; --on-accent: #0b1f17;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f4f8f6; --surface: #ffffff; --text: #16211e; --muted: #53665f;
+      --accent: #1d7a58; --accent-dim: #cfe3da; --line: #d3dfda; --on-accent: #ffffff;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text); line-height: 1.6;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  header.top { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 20px; color: var(--text); text-decoration: none; }
+  .brand svg { width: 32px; height: 32px; }
+  header.top nav a { font-size: 15px; text-decoration: none; }
+  header.top nav a:hover { text-decoration: underline; }
+
+  .hero { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; padding: 48px 0 72px; }
+  .eyebrow { color: var(--accent); font-size: 14px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin: 0 0 12px; }
+  h1 { font-size: clamp(34px, 6vw, 52px); line-height: 1.1; margin: 0 0 20px; font-weight: 650; letter-spacing: -0.02em; }
+  .lead { font-size: 19px; color: var(--muted); margin: 0 0 28px; max-width: 34em; }
+  .cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+  .pill {
+    display: inline-block; padding: 12px 20px; border-radius: 999px; font-size: 16px; font-weight: 600;
+    border: 1.5px solid var(--accent-dim); color: var(--text); background: var(--surface);
+  }
+  .pill small { display: block; font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; text-transform: uppercase; }
+  .textlink { font-size: 16px; }
+
+  .dial { display: flex; justify-content: center; }
+  .dial svg { width: min(300px, 70vw); height: auto; }
+  .dial .num { font-size: 64px; font-weight: 600; fill: var(--text); }
+  .dial .unit { font-size: 16px; fill: var(--muted); letter-spacing: 0.04em; }
+
+  section { padding: 56px 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 28px; line-height: 1.2; margin: 0 0 12px; font-weight: 650; letter-spacing: -0.01em; }
+  .sub { color: var(--muted); font-size: 17px; margin: 0 0 32px; max-width: 38em; }
+
+  .steps { display: grid; grid-template-columns: 1fr; gap: 20px; list-style: none; padding: 0; margin: 0; counter-reset: step; }
+  @media (min-width: 700px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .steps li { counter-increment: step; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .steps li::before {
+    content: counter(step); display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+    background: var(--accent); color: var(--on-accent); font-weight: 700; margin-bottom: 14px;
+  }
+  .steps h3, .cards h3 { font-size: 18px; margin: 0 0 6px; font-weight: 600; }
+  .steps p, .cards p { margin: 0; color: var(--muted); font-size: 16px; }
+
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+  .card { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+
+  .private { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 32px; }
+  .private ul { margin: 16px 0 24px; padding-left: 22px; }
+  .private li { margin: 6px 0; }
+
+  .good ul { margin: 0; padding-left: 22px; color: var(--muted); }
+  .good li { margin: 10px 0; }
+  .good li strong { color: var(--text); font-weight: 600; }
+
+  footer { border-top: 1px solid var(--line); padding: 32px 0 56px; color: var(--muted); font-size: 14px; }
+  footer p { margin: 6px 0; }
+  footer .links { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-bottom: 14px; font-size: 15px; }
+
+  @media (max-width: 760px) {
+    .hero { grid-template-columns: 1fr; padding-top: 24px; gap: 32px; }
+    .dial { order: -1; }
+    section { padding: 44px 0; }
+    .private { padding: 24px; }
+  }
+</style>
 </head>
-<body><p><a href="privacy.html">Kalm Privacy Policy</a></p></body>
+<body>
+<div class="wrap">
+  <header class="top">
+    <a class="brand" href="./" aria-label="Kalm home">
+      <svg viewBox="24 24 60 60" aria-hidden="true"><path d="M54,30 A24,24 0 1,1 38,36.5" fill="none" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" /></svg>
+      Kalm
+    </a>
+    <nav aria-label="Main"><a href="privacy.html">Privacy policy</a></nav>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <p class="eyebrow">For Android</p>
+        <h1>Put your phone down. Properly.</h1>
+        <p class="lead">Kalm locks your phone for the time you choose, from 1 minute to 3 hours. Calls and messages still get through. Everything else waits, and there is no stop button.</p>
+        <div class="cta">
+          <span class="pill"><small>Coming soon</small>Google Play</span>
+          <a class="textlink" href="privacy.html">Read the privacy policy</a>
+        </div>
+      </div>
+      <div class="dial" aria-hidden="true">
+        <svg viewBox="0 0 240 240" role="img">
+          <circle cx="120" cy="120" r="100" fill="none" stroke="var(--accent-dim)" stroke-width="14" />
+          <circle cx="120" cy="120" r="100" fill="none" stroke="var(--accent)" stroke-width="14" stroke-linecap="round"
+                  stroke-dasharray="157.08 628.32" transform="rotate(-90 120 120)" />
+          <circle cx="220" cy="120" r="13" fill="var(--accent)" stroke="var(--bg)" stroke-width="4" />
+          <text class="num" x="120" y="132" text-anchor="middle">45</text>
+          <text class="unit" x="120" y="164" text-anchor="middle">minutes</text>
+        </svg>
+      </div>
+    </div>
+
+    <section id="how">
+      <h2>How it works</h2>
+      <p class="sub">Three steps, and the third one is waiting.</p>
+      <ol class="steps">
+        <li>
+          <h3>Choose how long</h3>
+          <p>Drag the ring to anything from 1 minute to 3 hours. Or set a schedule that starts by itself, like an alarm.</p>
+        </li>
+        <li>
+          <h3>Tap Lock</h3>
+          <p>Any app you have not allowed is covered by a calm lock screen with a countdown.</p>
+        </li>
+        <li>
+          <h3>Wait it out</h3>
+          <p>Kalm has no stop button. When the timer runs down, your phone is yours again.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section id="features">
+      <h2>What you get</h2>
+      <p class="sub">Small on purpose. It does one thing and tries to do it well.</p>
+      <div class="cards">
+        <div class="card">
+          <h3>Any length</h3>
+          <p>From 1 minute to 3 hours, one minute at a time. Tap the number to type it instead.</p>
+        </div>
+        <div class="card">
+          <h3>Scheduled locks</h3>
+          <p>Lock at 9 pm every night for an hour without lifting a finger. Choose the days; set up to ten.</p>
+        </div>
+        <div class="card">
+          <h3>Calls still get through</h3>
+          <p>Phone and Messages are always allowed, so people can reach you when it matters.</p>
+        </div>
+        <div class="card">
+          <h3>Only what is essential</h3>
+          <p>You can allow banking and payment apps, authenticator apps and maps. Shopping, social, video, mail and browsers can never be allowed.</p>
+        </div>
+        <div class="card">
+          <h3>Truly Kalm</h3>
+          <p>An optional setting that pauses the timer while you are in an allowed app, so a 2 hour lock really is 2 hours away from your phone.</p>
+        </div>
+        <div class="card">
+          <h3>Your week at a glance</h3>
+          <p>Your streak and the last seven days, in one calm screen. Pick from eight colour themes.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <div class="private">
+        <h2>Private by design</h2>
+        <ul>
+          <li>Kalm has <strong>no internet permission</strong>, so it cannot send anything anywhere.</li>
+          <li>No account, no ads, no analytics, no crash reporting.</li>
+          <li>Your schedules, allowed apps and history stay on your phone.</li>
+        </ul>
+        <a href="privacy.html">Read the full privacy policy</a>
+      </div>
+    </section>
+
+    <section id="good-to-know" class="good">
+      <h2>Good to know</h2>
+      <ul>
+        <li><strong>Android 9 or newer.</strong></li>
+        <li><strong>Setup is two switches in Settings.</strong> Accessibility lets Kalm see which app is in front, never what is on your screen. Do Not Disturb access lets it hide notifications during a lock. Kalm walks you through both.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <div class="links">
+      <a href="privacy.html">Privacy policy</a>
+      <a href="mailto:shiva.zen.dev@gmail.com">Contact</a>
+    </div>
+    <p>Made by Apoorv Pandey.</p>
+    <p>Android and Google Play are trademarks of Google LLC.</p>
+  </footer>
+</div>
+</body>
 </html>
