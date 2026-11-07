@@ -76,6 +76,8 @@ For Android's own system windows, Kalm also looks at the window's title so that 
 During a standard lock, Kalm uses it to hide notifications. It first notes your current setting and puts it back when the lock ends.</p>
 <p><strong>List of apps on your phone.</strong><br>
 Kalm looks at which apps are installed so it can show you the picker for allowed apps, and so it can recognise banking, payment, authenticator and maps apps. This list stays on your phone and is not sent anywhere.</p>
+<p><strong>Checking that it is you (fingerprint, PIN, pattern or password).</strong><br>
+Before a lock starts, Kalm can ask your phone to check that it is really you, so that nobody else can start a lock on your phone. This uses Android's own screen, where you touch the fingerprint sensor or enter your phone's PIN, pattern or password. Android does the checking. Kalm never sees, reads or stores your fingerprint, PIN, pattern or password. All it is told is "yes, that was the owner" or "no". You can switch this off in Settings. Kalm needs Android's "use biometric" permission for it, which Android grants automatically.</p>
 <p><strong>Exact alarms and "run after restart".</strong><br>
 So a lock ends at the exact minute, a scheduled lock starts at the exact minute, and a running lock carries on after you restart your phone.</p>
 <p><strong>Phone state, answering calls and call log (stronger lock only).</strong><br>
