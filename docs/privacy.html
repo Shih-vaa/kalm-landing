@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy — Kalm</title>
+<meta name="description" content="Kalm collects no information. Nothing leaves your phone." />
+<style>
+  :root {
+    color-scheme: dark light;
+    --bg: #101514; --surface: #1e2826; --text: #e8efec; --muted: #8fa39b; --accent: #7fd1ae; --line: #2f4a42;
+  }
+  @media (prefers-color-scheme: light) {
+    :root { --bg: #f4f8f6; --surface: #ffffff; --text: #16211e; --muted: #53665f; --accent: #1d7a58; --line: #cfdcd6; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text); line-height: 1.65;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+  h1 { font-size: 28px; margin: 0 0 12px; font-weight: 600; }
+  h2 { font-size: 19px; margin: 36px 0 8px; font-weight: 600; color: var(--accent); }
+  p, li { font-size: 16px; }
+  p { margin: 12px 0; }
+  ul { padding-left: 22px; }
+  li { margin: 6px 0; }
+  a { color: var(--accent); }
+  code { background: var(--surface); border-radius: 5px; padding: 1px 6px; font-size: 14px; }
+  strong { font-weight: 600; }
+  .tablewrap { overflow-x: auto; margin: 16px 0; border: 1px solid var(--line); border-radius: 12px; }
+  table { border-collapse: collapse; width: 100%; background: var(--surface); }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; font-size: 15px; }
+  th { color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--line); }
+  td + td, th + th { border-left: 1px solid var(--line); }
+  tr + tr td { border-top: 1px solid var(--line); }
+  footer { margin-top: 48px; color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+<h1>Kalm Privacy Policy</h1>
+<p><strong>Last updated: 8 November 2026</strong><br>
+<strong>Applies to:</strong> the Kalm app for Android (package <code>com.kalm.lock</code>), version 0.3.0 and later.<br>
+<strong>Made by:</strong> Apoorv Pandey</p>
+<h2>The short version</h2>
+<p>Kalm does not collect, send or share any information about you. Not one byte leaves your phone.</p>
+<ul>
+  <li>Kalm has <strong>no internet permission</strong>. It is not able to connect to the internet, so it cannot upload anything.</li>
+  <li>There is <strong>no account, no sign-in, no ads, no analytics and no crash reporting</strong>.</li>
+  <li>Everything Kalm remembers is stored <strong>on your phone only</strong>, and you can wipe it any time.</li>
+</ul>
+<p>The rest of this page explains that in detail.</p>
+<h2>What Kalm stores on your phone</h2>
+<p>Kalm keeps a few settings and records in its own private storage on your phone. No other app can read them.</p>
+<div class="tablewrap"><table>
+<thead><tr><th>What</th><th>Why</th></tr></thead>
+<tbody>
+<tr><td>Whether a lock is running, when it ends, and whether it is a Truly Kalm lock</td><td>So the lock survives a restart and ends on time</td></tr>
+<tr><td>Your list of allowed apps (the app names Android uses internally)</td><td>So only those apps open while locked</td></tr>
+<tr><td>Your scheduled locks (time of day, length, days)</td><td>So they start by themselves</td></tr>
+<tr><td>A history of your locks (when each started and how long it was set for)</td><td>For your streak and the Insights screen</td></tr>
+<tr><td>Your theme choice and your usual lock length</td><td>So Kalm looks and starts the way you left it</td></tr>
+<tr><td>Your Do Not Disturb settings from before a lock started</td><td>So Kalm can put them back exactly as they were when the lock ends</td></tr>
+</tbody></table></div>
+<p>Kalm turns off Android's cloud backup for its data (<code>allowBackup</code> is off), so this is not copied to Google Drive or to a new phone.</p>
+<h2>What Kalm can see, and what it does with it</h2>
+<p>Kalm needs a few special permissions to do its job. This is what each one is for.</p>
+<p><strong>Accessibility service (you turn it on yourself in Settings).</strong><br>
+While a lock is running, Kalm is told which app has just come to the front of the screen. If that app is not on your allowed list, Kalm covers it with the lock screen. That is the only reason this permission exists.<br>
+Kalm asks Android *not* to give it screen contents (<code>canRetrieveWindowContent</code> is off). It cannot read your messages, passwords, what you type, or anything else shown in an app.<br>
+For Android's own system windows, Kalm also looks at the window's title so that it can recognise the power-off menu and close it during a lock. That title is checked on the spot and then dropped. It is not kept in Kalm's storage and not sent anywhere.</p>
+<p><strong>Do Not Disturb access (you grant it in Settings).</strong><br>
+During a standard lock, Kalm uses it to hide notifications. It first notes your current setting and puts it back when the lock ends.</p>
+<p><strong>List of apps on your phone.</strong><br>
+Kalm looks at which apps are installed so it can show you the picker for allowed apps, and so it can recognise banking, payment, authenticator and maps apps. This list stays on your phone and is not sent anywhere.</p>
+<p><strong>Exact alarms and "run after restart".</strong><br>
+So a lock ends at the exact minute, a scheduled lock starts at the exact minute, and a running lock carries on after you restart your phone.</p>
+<p><strong>Phone state, answering calls and call log (stronger lock only).</strong><br>
+These are used only in the optional stronger "kiosk" lock, which has to be set up from a computer and is not part of normal use. There Kalm shows its own Answer / Decline card, and shows the number of the call that is ringing right now. In the standard lock, Kalm never asks for these permissions and does not use them.<br>
+Kalm does not read your call history, does not store the number, and does not send it anywhere.</p>
+<p>Kalm does not use your contacts, location, camera, microphone, photos or files.</p>
+<h2>Sharing</h2>
+<p>Kalm shares nothing with anyone, because it has nothing to send and no way to send it. There are no third-party services, ad networks or analytics tools inside the app.</p>
+<p>If you install Kalm from Google Play, Google handles the download, as it does for every app. That is governed by Google's own privacy policy, not this one.</p>
+<h2>Keeping and deleting your information</h2>
+<p>You are in control of everything Kalm remembers:</p>
+<ul>
+  <li>Delete a scheduled lock or change your allowed apps inside Kalm at any time.</li>
+  <li>To remove everything, uninstall Kalm, or use "Clear data" for Kalm in your phone's app settings.</li>
+</ul>
+<p>Kalm cannot end a lock early, on purpose. That is the whole point of the app. Clearing or uninstalling is for when no lock is running.</p>
+<h2>Children</h2>
+<p>Kalm is a general-purpose tool and is not aimed at children. Because Kalm collects no information at all, it collects none from children either.</p>
+<h2>Changes to this policy</h2>
+<p>If Kalm ever changes in a way that affects your privacy, I will update this page and the date at the top before the new version is released. Kalm will not start collecting data without this page saying so first.</p>
+<h2>Contact</h2>
+<p>Questions about this policy or about Kalm:</p>
+<ul>
+  <li>Email: <strong><a href="mailto:shiva.zen.dev@gmail.com">shiva.zen.dev@gmail.com</a></strong></li>
+</ul>
+<footer>Kalm &middot; Privacy Policy</footer>
+</main>
+</body>
+</html>
